@@ -1,3 +1,8 @@
+# CUSTOM GITIGNORE DIRECTIVES
+*.user
+src/resources/*.c
+src/resources/*.glade~
+
 # Prerequisites
 *.d
 
