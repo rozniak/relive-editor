@@ -27,5 +27,28 @@ MainWindow* MainWindow::create()
         );
     }
 
+    window->signal_show().connect(
+        sigc::bind<Gtk::Window*>(
+            sigc::mem_fun(
+                *window,
+                &MainWindow::on_show
+            ),
+            window
+        )
+    );
+
     return window;
+}
+
+void MainWindow::on_show(
+    Gtk::Window *window
+)
+{
+    auto dialog = new Gtk::MessageDialog("wow", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+
+    dialog->set_secondary_text("check it out");
+
+    dialog->run();
+
+    delete dialog;
 }

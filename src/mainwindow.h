@@ -15,6 +15,9 @@ class MainWindow : public Gtk::ApplicationWindow
 
     protected:
         Glib::RefPtr<Gtk::Builder> builder;
+        void on_show(
+            Gtk::Window* window
+        );
 };
 
 #endif // MAINWINDOW_H
