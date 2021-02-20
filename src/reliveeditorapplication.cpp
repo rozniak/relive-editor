@@ -50,6 +50,21 @@ void ReliveEditorApplication::on_activate()
     }
 }
 
+void ReliveEditorApplication::on_open(
+    const Gio::Application::type_vec_files& files,
+    const Glib::ustring&                    hint
+)
+{
+    for (const auto& file : files)
+    {
+        auto window = create_mainwindow();
+
+        window->present();
+
+        window->open_level(file);
+    }
+}
+
 void ReliveEditorApplication::on_hide_window(
     Gtk::Window *window
 )

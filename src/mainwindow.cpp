@@ -51,6 +51,13 @@ MainWindow* MainWindow::create()
     return window;
 }
 
+void MainWindow::open_level(
+    Glib::RefPtr<Gio::File> file
+)
+{
+    set_title(file->get_path());
+}
+
 void MainWindow::on_show(
     Gtk::Window *window
 )
@@ -88,7 +95,16 @@ void MainWindow::on_file_open_path_item_clicked()
     openFileDialog->add_button("_Cancel", Gtk::RESPONSE_CANCEL);
     openFileDialog->add_button("_Open", Gtk::RESPONSE_OK);
 
-    openFileDialog->run();
+    int result = openFileDialog->run();
+
+    switch (result)
+    {
+        case (Gtk::RESPONSE_OK):
+        {
+            open_level(openFileDialog->get_file());
+            break;
+        }
+    }
 
     delete openFileDialog;
 }

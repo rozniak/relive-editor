@@ -13,6 +13,10 @@ class MainWindow : public Gtk::ApplicationWindow
 
         static MainWindow* create();
 
+        void open_level(
+            const Glib::RefPtr<Gio::File> file
+        );
+
     protected:
         Glib::RefPtr<Gtk::Builder> builder;
         void on_show(
