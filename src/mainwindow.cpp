@@ -6,6 +6,17 @@ MainWindow::MainWindow(
     const Glib::RefPtr<Gtk::Builder>& builder
 ) : Gtk::ApplicationWindow(cobject), builder(builder)
 {
+    builder->get_widget(
+        "menu_file_open_path",
+        fileOpenPathMenuItem
+    );
+
+    fileOpenPathMenuItem->signal_activate().connect(
+        sigc::mem_fun(
+            *this,
+            &MainWindow::on_file_open_path_item_clicked
+        )
+    );
 }
 
 MainWindow* MainWindow::create()
@@ -43,6 +54,10 @@ MainWindow* MainWindow::create()
 void MainWindow::on_show(
     Gtk::Window *window
 )
+{
+}
+
+void MainWindow::on_file_open_path_item_clicked()
 {
     auto dialog = new Gtk::MessageDialog("wow", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
 

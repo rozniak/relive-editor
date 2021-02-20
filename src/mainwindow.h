@@ -18,6 +18,10 @@ class MainWindow : public Gtk::ApplicationWindow
         void on_show(
             Gtk::Window* window
         );
+
+    private:
+        Gtk::MenuItem* fileOpenPathMenuItem;
+        void on_file_open_path_item_clicked();
 };
 
 #endif // MAINWINDOW_H
