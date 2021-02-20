@@ -3,7 +3,6 @@
 #include <string>
 #include "mainwindow.h"
 #include "reliveeditorapplication.h"
-#include "alive_api.hpp"
 
 ReliveEditorApplication::ReliveEditorApplication()
 : Gtk::Application("uk.oddmatics.relive.editor", Gio::APPLICATION_HANDLES_OPEN)
@@ -29,10 +28,6 @@ MainWindow* ReliveEditorApplication::create_mainwindow()
             ),
             window
         )
-    );
-
-    window->set_title(
-        Glib::ustring::format(AliveAPI::GetAPIVersion())
     );
 
     return window;

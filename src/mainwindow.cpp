@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include "mainwindow.h"
+#include "alive_api.hpp"
 
 MainWindow::MainWindow(
     BaseObjectType*                   cobject,
@@ -68,7 +69,7 @@ void MainWindow::on_file_open_path_item_clicked()
 {
     auto dialog = new Gtk::MessageDialog("wow", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
 
-    dialog->set_secondary_text("check it out");
+    dialog->set_secondary_text(Glib::ustring::format(AliveAPI::GetApiVersion()));
 
     dialog->run();
 
