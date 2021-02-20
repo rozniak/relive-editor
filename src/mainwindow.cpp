@@ -66,4 +66,29 @@ void MainWindow::on_file_open_path_item_clicked()
     dialog->run();
 
     delete dialog;
+
+    // File filter
+    // 
+    auto filter = Gtk::FileFilter::create();
+
+    filter->add_pattern("*.lvl");
+    filter->set_name("Abe's Oddysee/Exoddus levels");
+
+    // File chooser stuff
+    //
+    auto openFileDialog =
+        new Gtk::FileChooserDialog(
+            *this,
+            "Open level",
+            Gtk::FILE_CHOOSER_ACTION_OPEN
+        );
+
+    openFileDialog->add_filter(filter);
+
+    openFileDialog->add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+    openFileDialog->add_button("_Open", Gtk::RESPONSE_OK);
+
+    openFileDialog->run();
+
+    delete openFileDialog;
 }
