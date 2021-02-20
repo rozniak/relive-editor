@@ -9,6 +9,8 @@ pkg_check_modules(GTKMM gtkmm-3.0)
 link_directories(${GTKMM_LIBRARY_DIRS})
 include_directories(${GTKMM_INCLUDE_DIRS})
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/submodules/alive_reversing/CMakeLists.txt)
+
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/reliveeditorapplication.h
@@ -19,3 +21,4 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} ${GTKMM_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} alive_api)

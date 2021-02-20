@@ -1,0 +1,3 @@
+[submodule "submodules/alive_reversing"]
+	path = submodules/alive_reversing
+	url = https://github.com/aliveteam/alive_reversing
