@@ -1,5 +1,7 @@
 # CUSTOM GITIGNORE DIRECTIVES
+*.swp
 *.user
+build/
 src/resources/*.c
 src/resources/*.glade~
 
