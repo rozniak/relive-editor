@@ -15,18 +15,9 @@ SelectPathDialog::SelectPathDialog(
 }
 
 SelectPathDialog* SelectPathDialog::create_for_level(
-    const Glib::ustring& filepath
+    const AliveAPI::EnumeratePathsResult& enumResult
 )
 {
-    auto enumResult = AliveAPI::EnumeratePaths(filepath);
-
-    if (enumResult.mResult != AliveAPI::Error::None)
-    {
-        // FIXME: Handle error here! 
-        //
-        //return nullptr;
-    }
-
     // Paths enum'd okay - spawn the dialog
     //
     auto              builder = Gtk::Builder::create_from_resource(

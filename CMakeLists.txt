@@ -22,6 +22,8 @@ add_executable(${PROJECT_NAME}
     src/levelfile.cpp
     src/selectpathdialog.h
     src/selectpathdialog.cpp
+    src/aliveapierror.h
+    src/aliveapierror.cpp
     src/resources/resources.c
 )
 

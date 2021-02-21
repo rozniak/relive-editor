@@ -13,11 +13,7 @@ class SelectPathDialog : public Gtk::Dialog
         );
 
         static SelectPathDialog* create_for_level(
-            const Glib::ustring& filepath
-        );
-
-        void bind_model(
-            const AliveAPI::EnumeratePathsResult& model
+            const AliveAPI::EnumeratePathsResult& enumResult
         );
 
     protected:
@@ -26,6 +22,10 @@ class SelectPathDialog : public Gtk::Dialog
     private:
         Gtk::ListBox*                  path_list_box;
         AliveAPI::EnumeratePathsResult paths_model;
+        
+        void bind_model(
+            const AliveAPI::EnumeratePathsResult& model
+        );
 };
 
 #endif // SELECTPATHDIALOG_H

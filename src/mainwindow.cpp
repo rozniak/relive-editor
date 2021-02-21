@@ -1,6 +1,7 @@
 #include <gtkmm.h>
 #include <stdexcept>
 #include "alive_api.hpp"
+#include "aliveapierror.h"
 #include "mainwindow.h"
 #include "selectpathdialog.h"
 
@@ -60,14 +61,33 @@ void MainWindow::open_level(
 {
     set_title(file->get_path());
 
-    auto dialog = SelectPathDialog::create_for_level(file->get_path());
+    auto enumResult = AliveAPI::EnumeratePaths(file->get_path());
 
-    if (dialog == nullptr)
+    if (enumResult.mResult != AliveAPI::Error::None)
     {
-        // FIXME: Handle problems
-        //
+        auto msgDialog =
+            new Gtk::MessageDialog(
+                "Error",
+                false,
+                Gtk::MESSAGE_ERROR,
+                Gtk::BUTTONS_OK,
+                true
+            );
+
+        msgDialog->set_secondary_text(
+            AliveApiError::get_string(enumResult.mResult)
+        );
+
+        msgDialog->run();
+
+        delete msgDialog;
+
         return;
     }
+
+    // Paths enumerated okay... load dialog now
+    //
+    auto dialog = SelectPathDialog::create_for_level(enumResult);
 
     dialog->run();
 
@@ -82,14 +102,6 @@ void MainWindow::on_show(
 
 void MainWindow::on_file_open_path_item_clicked()
 {
-    auto dialog = new Gtk::MessageDialog("wow", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
-
-    dialog->set_secondary_text(Glib::ustring::format(AliveAPI::GetApiVersion()));
-
-    dialog->run();
-
-    delete dialog;
-
     // File filter
     // 
     auto filter = Gtk::FileFilter::create();
