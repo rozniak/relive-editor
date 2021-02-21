@@ -18,6 +18,10 @@ add_executable(${PROJECT_NAME}
     src/reliveeditorapplication.cpp
     src/mainwindow.h
     src/mainwindow.cpp
+    src/levelfile.h
+    src/levelfile.cpp
+    src/selectpathdialog.h
+    src/selectpathdialog.cpp
     src/resources/resources.c
 )
 

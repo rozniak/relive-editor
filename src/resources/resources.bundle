@@ -2,5 +2,6 @@
 <gresources>
     <gresource prefix="/uk/oddmatics/relive/editor">
         <file>main-ui.glade</file>
+        <file>path-list-dialog.glade</file>
     </gresource>
 </gresources>

@@ -1,6 +1,8 @@
+#include <gtkmm.h>
 #include <stdexcept>
-#include "mainwindow.h"
 #include "alive_api.hpp"
+#include "mainwindow.h"
+#include "selectpathdialog.h"
 
 MainWindow::MainWindow(
     BaseObjectType*                   cobject,
@@ -57,6 +59,17 @@ void MainWindow::open_level(
 )
 {
     set_title(file->get_path());
+
+    auto dialog = SelectPathDialog::create_for_level(file->get_path());
+
+    if (dialog == nullptr)
+    {
+        // FIXME: Handle problems
+        //
+        return;
+    }
+
+    dialog->run();
 }
 
 void MainWindow::on_show(
@@ -96,16 +109,22 @@ void MainWindow::on_file_open_path_item_clicked()
     openFileDialog->add_button("_Cancel", Gtk::RESPONSE_CANCEL);
     openFileDialog->add_button("_Open", Gtk::RESPONSE_OK);
 
-    int result = openFileDialog->run();
+    Glib::RefPtr<Gio::File> file;
+    int                     result = openFileDialog->run();
 
     switch (result)
     {
         case (Gtk::RESPONSE_OK):
         {
-            open_level(openFileDialog->get_file());
+            file = openFileDialog->get_file();
             break;
         }
     }
 
     delete openFileDialog;
+
+    if (file)
+    {
+        open_level(file);
+    }
 }
