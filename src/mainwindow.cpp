@@ -70,6 +70,8 @@ void MainWindow::open_level(
     }
 
     dialog->run();
+
+    delete dialog;
 }
 
 void MainWindow::on_show(
