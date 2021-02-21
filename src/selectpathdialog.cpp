@@ -56,4 +56,29 @@ void SelectPathDialog::bind_model(
 )
 {
     paths_model = model;
+
+    // Bin anything currently in the list box
+    //
+    Gtk::ListBoxRow* toClear = nullptr;
+
+    while ((toClear = path_list_box->get_row_at_index(0)) != nullptr)
+    {
+        path_list_box->remove(*toClear);
+    }
+
+    // Add paths from the model now
+    //
+    for (int pathId : paths_model.paths)
+    {
+        Gtk::Label* label =
+            Gtk::manage(
+                new Gtk::Label(
+                    Glib::ustring::compose("%1%2", paths_model.pathBndName, pathId)
+                )
+            );
+
+        path_list_box->append(
+            *label
+        );
+    }
 }
